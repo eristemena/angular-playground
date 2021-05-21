@@ -1,0 +1,73 @@
+<app-title>Forms Module</app-title>
+
+<div
+  class="
+    flex flex-col
+    items-center
+    mx-auto
+    bg-gray-200
+    py-5
+    rounded-md
+    shadow-inner
+    my-3
+  "
+>
+  <form #emailForm="ngForm" (ngSubmit)="onSubmit()" class="w-1/2">
+    <label class="font-bold">Email</label>
+    <input
+      class="border-2 border-gray-200 rounded-md p-2 w-full"
+      name="email"
+      [(ngModel)]="email"
+      required
+      pattern=".+@.+\..+"
+      #emailControl="ngModel"
+      [ngClass]="{
+        'border-red-500':
+          (emailControl.touched || emailControl.dirty) && emailControl.errors
+      }"
+    />
+    <ng-container
+      *ngIf="
+        (emailControl.touched || emailControl.dirty) && emailControl.errors
+      "
+    >
+      <p class="text-red-700 text-xs mt-1" *ngIf="emailControl.errors.required">
+        Value is required
+      </p>
+      <p class="text-red-700 text-xs mt-1" *ngIf="emailControl.errors.pattern">
+        Format email invalid
+      </p>
+    </ng-container>
+
+    <button
+      type="submit"
+      class="
+        bg-indigo-600
+        shadow-md
+        text-indigo-100
+        px-5
+        py-2
+        rounded-md
+        font-bold
+        my-3
+        disabled:bg-gray-200
+        disabled:text-gray-300
+        disabled:shadow-none
+      "
+      [disabled]="!emailForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+
+  <div class="text-sm mt-4 bg-gray-100 p-3 w-1/2">
+    <div>Form contents {{ emailForm.value | json }}</div>
+    <div>Form valid {{ emailForm.valid }}</div>
+    <div>
+      Form errors
+      {{
+        (emailForm.controls.email ? emailForm.controls.email.errors : "") | json
+      }}
+    </div>
+  </div>
+</div>
