@@ -5,8 +5,7 @@ import { LabsRoutingModule } from './labs-routing.module';
 import { EquationComponent } from './equation/equation.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     EquationComponent,
@@ -15,7 +14,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     LabsRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class LabsModule { }
